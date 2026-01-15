@@ -306,13 +306,7 @@ function drawhud()
 	if(base.damage > 50) hcolor=10
 	if(base.damage > 75) hcolor=9
 	if(base.damage > 90) hcolor=8
-	print(hmsg,3,3,hcolor)	
---	print("fps: "..stat(7),3,11,hcolor)	
---	print("bulletlist: "..#bulletlist,3,19,hcolor)	
---	print("helis: "..#helis,3,27,hcolor)	
---	print("soldiers: "..#soldiers,3,35,hcolor)	
---	print("particles: "..#particles,3,43,hcolor)	
---	print("#loops: "..#particles+(#bulletlist*#soldiers)+(#bulletlist*#helis)+#bulletlist,3,51,hcolor)	
+	print(hmsg,3,3,hcolor)
 	nx=nukes
 	if(base.powerup>0) nx+=1
 	hpos=0
@@ -1147,21 +1141,11 @@ function checkbulletandheli(heli,bullet)
 					addscore(25)
 				end
 				sfx(7)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
-				addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
-				addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
-				addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
-				addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
-				addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
-				addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
+				for i=1,5 do
+					addparticle(r(heli.x,4),r(heli.y,2),heli.dx,0,chaff)
+					addparticle(r(heli.x,4),r(heli.y,2),-.3+rnd(.6),-.3+rnd(.6),smoke)
+					addparticle(r(heli.x,4),r(heli.y,2),heli.dx/2,0,bigfire)
+				end
 			else
 				if(heli.elite) heli.glow=true
 				sfx(10)
@@ -1317,12 +1301,12 @@ function updatesoldier(soldier)
 		if (soldier.y > 119) then
 		 del(soldiers,soldier)
 		 sfx(14)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),turf)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),turf)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),turf)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),turf)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),blood)
-			addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),blood)
+			for i=1,4 do
+				addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),turf)
+			end
+			for i=1,2 do
+				addparticle(soldier.x+(-.5+rnd(1)),126,(-1+rnd(2)),-rnd(1),blood)
+			end
 		end
 				if (soldier.tick > 10) then
 			soldier.tick=0
