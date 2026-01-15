@@ -362,7 +362,7 @@ function drawintro()
 			drawbase()
 			if (haventplayedwhoop) then
 				sfx(20)
-				haventplayedloop=false
+				haventplayedwhoop=false
 			end
 			addparticle(64-10+rnd(20),115+rnd(12),-1+(rnd(2)),-.5-rnd(1),chaff)
 		end
@@ -690,11 +690,11 @@ function updatebase()
 			--	end
 			end
 			for i=1,#helis do
+				heli=helis[i]
 				vdx=(-(64-heli.x)/64)
 				vdy=(-(128-heli.x)/128)
 				heli.dx+=vdx/10
 				heli.dy+=vdy/10
-				heli=helis[i]
 				heli.h-=rnd(20)
 				addparticle(heli.x,heli.y,-.5+rnd(1),-.5+rnd(1),fire)
 				addparticle(heli.x,heli.y,-.5+rnd(1),-.5+rnd(1),smoke)
