@@ -515,16 +515,16 @@ end
 
 function addscore(num)
 	firstblood=true
-	if (stage > 5) then
-		num=num*3
-	elseif (stage>10) then
-		num=num*5
-	elseif (stage>15) then
-		num=num*10
+	if (stage>30) then
+		num=num*20
 	elseif (stage>20) then
 		num=num*15
-	elseif (stage>30) then
-		num=num*20
+	elseif (stage>15) then
+		num=num*10
+	elseif (stage>10) then
+		num=num*5
+	elseif (stage>5) then
+		num=num*3
 	end
 	if (gamestatus==gstatus.playing) then
 		score += (num*10) >> 16
