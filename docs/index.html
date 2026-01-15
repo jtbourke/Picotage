@@ -1,6 +1,9 @@
 ﻿<html><head>
 <title>Picotage - A PICO-8 Game</title>
 <meta name="viewport" content="width=device-width, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <script type="text/javascript">
 
 	// Default shell for PICO-8 0.2.2 (includes @weeble's gamepad mod 1.0)
@@ -980,24 +983,44 @@ canvas{
 	fill:none;
 }
 
+@keyframes glow-fadein {
+	0% { box-shadow: none; }
+	100% { box-shadow: 0 0 15px #4af, 0 0 30px #4af, 0 0 45px #28f; }
+}
+
+@keyframes text-fadein {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+.glow-warmup {
+	animation: glow-fadein 1s ease-out forwards;
+}
+
+.content-fadein {
+	opacity: 0;
+	animation: text-fadein 1.5s ease-out 0.5s forwards;
+}
+
 -->
 </STYLE>
 
 </head>
 
-<body style="padding:0px; margin:0px; background-color:#222; color:#ccc">
+<body style="padding:0px; margin:0px; background:linear-gradient(to bottom, #1a2a4a 0%, #0d1520 100%); background-attachment:fixed; color:#ccc; min-height:100vh; position:relative;">
+<div style="position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.30; pointer-events:none; background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAYJJREFUaIHtmEEOgjAQRX9x4Q248QjewBu4cgUsXLpyzyW8gTdw4Q1YuHIp0tgUCkwnlMT/kpCQ6cz8aZkOCYIgCIIgCH4IlQtKmpTU8v8VPF+zT0Gd2i9+nwEAy0ftP/wjUB1atMYeT0VfvOsKamNcr7vXwruSz+C/sEPcD+w5bLRSO9pN1vVcHbG1eH9EPOvRqC15nQHSw+3oU6M3xL7mpSV2pJ+2I09IYz/nfvyXPnC9Xp+Xy+UzAJCm6X04HH4fGIbh+3w+fwIAhmH4PBwOn4fD4TNJkrRpmg+n0ykBgH6/nwJAkiRp0zQfut3ux+l0+gQAQsj3LMu+Z1n2DQCEkO9Zln0HgDRNP3S73Y8AwPdXXNe9EEJkAJCm6YckST40TfMhSZIPWZZ9S9P0AwBwPQvXBZ1Op08AwHVd1zRNkyRJ3wOgaZoPAMBxnA9t275P0/Q9x3E+tG37HgDatn0PAJzXTe+nWZa9B4Asy94DQJZl7wEgy7L3AMh1HAfi/wEuGaxtWpSLZgAAAABJRU5ErkJggg==');"></div>
 <div id="body_0"> <!-- hide this when playing in mobile (p8_touch_detected) so that elements don't affect layout -->
 
 
 <!-- Add any content above the cart here -->
 
-<div style="max-width:800px; margin:auto; padding:10px; text-align:center;">
-	<h1 style="color:#fff; margin:0 0 5px 0; font-family:'Arial Black', Gadget, sans-serif; font-size:2.5em; text-shadow: 3px 3px 0 #000;">Picotage</h1>
-	<p style="color:#ff0; font-size:1.2em; margin:0 0 10px 0; font-family:sans-serif;">New! Even higher scores now possible!!</p>
+<div style="max-width:800px; margin:auto; text-align:center;">
+	<h1 style="color:#fff; margin:0; font-family:'Black Ops One', cursive; font-size:3.5em; font-weight:normal; text-shadow: 0 0 10px #4af, 0 0 20px #4af, 0 0 30px #28f, 3px 3px 0 #000; letter-spacing:3px;">PICOTAGE</h1>
+	<p style="color:#ff0; font-size:1.1em; margin:0; font-family:sans-serif; font-weight:bold;">New! Even higher scores now possible!!</p>
 </div>
 
-<div id="p8_frame_0" style="max-width:800px; max-height:800px; margin:auto;"> <!-- double function: limit size, and display only this div for touch devices -->
-<div id="p8_frame" style="display:flex; width:100%; max-width:95vw; height:100vw; max-height:95vh; margin:auto;">
+<div id="p8_frame_0" style="max-width:800px; max-height:550px; margin:auto;"> <!-- double function: limit size, and display only this div for touch devices -->
+<div id="p8_frame" style="display:flex; width:100%; max-width:95vw; height:100vw; max-height:65vh; margin:auto;">
 
 	<div id="p8_menu_buttons_touch" style="position:absolute; width:100%; z-index:10; left:0px;">
 		<div class="p8_menu_button" id="p8b_full"  style="float:left;margin-left:10px" onClick="p8_give_focus(); p8_request_fullscreen();"></div>
@@ -1005,7 +1028,7 @@ canvas{
 		<div class="p8_menu_button" id="p8b_close" style="float:right; margin-right:10px" onClick="p8_close_cart();"></div>
 	</div>
 
-	<div id="p8_container"
+	<div id="p8_container" class="glow-warmup"
 		style="margin:auto; display:table;"
 		onclick="p8_create_audio_context(); p8_run_cart();">
 
@@ -1100,25 +1123,25 @@ canvas{
 
 <!-- Add content below the cart here -->
 
-<div style="max-width:800px; margin:40px auto; padding:20px; font-family:sans-serif; line-height:1.6; clear:both;">
-	<h2 style="color:#fff;">About</h2>
+<div class="content-fadein" style="max-width:800px; margin:300px auto 40px auto; padding:20px; font-family:sans-serif; line-height:1.6; clear:both;">
+	<h2 style="color:#fff; text-shadow: 0 0 10px #4af, 0 0 20px #4af, 0 0 30px #28f, 2px 2px 0 #000;">About</h2>
 	<p>Picotage is a very simple action game where the goal is simply to survive as long as you can. Eliminate helicopters and soldiers before they attack your base!</p>
 
-	<h2 style="color:#fff;">Controls</h2>
+	<h2 style="color:#fff; text-shadow: 0 0 10px #4af, 0 0 20px #4af, 0 0 30px #28f, 2px 2px 0 #000;">Controls</h2>
 	<ul>
 		<li><strong>Arrow keys</strong> - Adjust cannon angle</li>
 		<li><strong>Z</strong> - Fire (hold or tap)</li>
 		<li><strong>X</strong> - Activate powerups (earned every 5 levels)</li>
 	</ul>
 
-	<h2 style="color:#fff;">Enemy Types</h2>
+	<h2 style="color:#fff; text-shadow: 0 0 10px #4af, 0 0 20px #4af, 0 0 30px #28f, 2px 2px 0 #000;">Enemy Types</h2>
 	<ul>
 		<li><strong>Green soldiers</strong> - Easily defeated</li>
 		<li><strong>Red shielded soldiers</strong> - Harder to eliminate, protect other troops</li>
 		<li><strong>Gray soldiers</strong> - Land dangerously close to your base</li>
 	</ul>
 
-	<h2 style="color:#fff;">Tips</h2>
+	<h2 style="color:#fff; text-shadow: 0 0 10px #4af, 0 0 20px #4af, 0 0 30px #28f, 2px 2px 0 #000;">Tips</h2>
 	<ul>
 		<li>Point straight up to make bullets ricochet and scatter - great for hitting nearby soldiers</li>
 		<li>Tap down arrow for fine cannon adjustments when targeting ground troops</li>
