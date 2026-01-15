@@ -1,0 +1,7 @@
+# PICO-8 machine-specific files
+config.txt
+*.lnk
+pico8.bat
+
+# Editor/tool settings
+.claude/
